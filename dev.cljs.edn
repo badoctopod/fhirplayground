@@ -1,0 +1,10 @@
+^{:watch-dirs      ["src/cljs"]
+  :css-dirs        ["resources/public/css"]
+  :auto-bundle     :webpack
+  :bundle-freq     :smart
+  :open-url        false
+  :final-output-to "resources/public/js/app_bundle.js"}
+{:main            fhirplayground.core
+ :closure-defines {"re_frame.trace.trace_enabled_QMARK_"        true
+                   "day8.re_frame.tracing.trace_enabled_QMARK_" true}
+ :preloads        [day8.re-frame-10x.preload]}
