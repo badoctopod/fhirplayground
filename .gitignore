@@ -13,3 +13,4 @@ pom.xml
 .rebel_readline_history
 figwheel-main.log
 /node_modules/
+.lsp/
