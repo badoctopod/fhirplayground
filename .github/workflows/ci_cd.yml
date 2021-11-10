@@ -1,0 +1,84 @@
+name: 'CI/CD'
+
+on:
+
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - "*.md"
+
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "*.md"
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup OpenJDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Google Chrome
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Setup Clojure
+        uses: DeLaGuardo/setup-clojure@3.5
+        with:
+          cli: 'latest'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 17
+
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/deps.edn') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install Node deps
+        run: npm ci
+
+      - name: Run backend tests
+        run: clojure -M:test
+
+      - name: Run frontend tests
+        run: clojure -M:fig:cljs-test
+
+      - name: Build frontend
+        run: clojure -M:fig:min
+
+      - name: Build backend
+        run: clojure -T:build uberjar
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "fhirplayground"
+          heroku_email: ${{secrets.PERSONAL_EMAIL}}
+          usedocker: true
