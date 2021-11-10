@@ -1,0 +1,8 @@
+#kaocha/v1
+ {:tests [{:id                    :unit-cljs
+           :type                  :kaocha.type/cljs
+           :source-paths          ["src/cljs"]
+           :test-paths            ["test/cljs"]
+           :cljs/repl-env         cljs.repl.node/repl-env
+           :cljs/timeout          300000
+           :cljs/compiler-options {:output-dir "target/kaocha/out"}}]}
