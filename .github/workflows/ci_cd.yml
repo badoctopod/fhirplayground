@@ -33,6 +33,8 @@ jobs:
 
       - name: Setup Google Chrome
         uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
 
       - name: Setup Clojure
         uses: DeLaGuardo/setup-clojure@3.5
