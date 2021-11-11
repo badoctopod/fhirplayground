@@ -1,8 +1,6 @@
 # Fhirplayground
 
-[![Build](https://github.com/badoctopod/fhirplayground/actions/workflows/ci_cd.yml/badge.svg)](https://github.com/badoctopod/fhirplayground/actions/workflows/ci_cd.yml)
-   •   
-**[Fhirplayground on Heroku](https://fhirplayground.herokuapp.com)**
+[![Build](https://github.com/badoctopod/fhirplayground/actions/workflows/ci_cd.yml/badge.svg)](https://github.com/badoctopod/fhirplayground/actions/workflows/ci_cd.yml)   •   **[Fhirplayground on Heroku](https://fhirplayground.herokuapp.com)**
 
 Fhirplayground is my personal learning curve project which main goal is getting
 basic understanding what [FHIR](https://www.hl7.org/fhir/) is.
