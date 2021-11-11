@@ -14,3 +14,4 @@ pom.xml
 figwheel-main.log
 /node_modules/
 .lsp/
+/resources/public/js/
